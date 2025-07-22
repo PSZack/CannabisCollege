@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pure Shaka's Cannabis Bible</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --shaka-blue: #00A7C4;
+            --shaka-orange: #F95700;
+            --shaka-dark-text: #073B4C;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+        }
+        .shaka-title {
+            color: var(--shaka-blue);
+        }
+        .flowchart-node {
+            border: 2px solid var(--shaka-dark-text);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            background-color: white;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .stat-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            padding: 1.5rem;
+            border-top: 5px solid var(--shaka-orange);
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        h2, h3 {
+            color: var(--shaka-dark-text);
+        }
+        .meter {
+            background-color: #E5E7EB;
+            border-radius: 9999px;
+            overflow: hidden;
+            height: 1.25rem;
+            border: 1px solid #D1D5DB;
+        }
+        .meter-bar {
+            height: 100%;
+            border-radius: 9999px;
+        }
+        .tooltip-trigger {
+            position: relative;
+            cursor: help;
+            border-bottom: 2px dotted var(--shaka-orange);
+            font-weight: 600;
+            display: inline-block;
+        }
+        .tooltip-text {
+            visibility: hidden;
+            width: 250px;
+            background-color: var(--shaka-dark-text);
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 10;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -125px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-weight: 400;
+            font-size: 0.875rem;
+            line-height: 1.4;
+        }
+        .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: var(--shaka-dark-text) transparent transparent transparent;
+        }
+        .tooltip-trigger:hover .tooltip-text,
+        .tooltip-trigger:focus .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="shaka-title text-4xl md:text-6xl font-black mb-2">Pure Shaka's Cannabis Bible</h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Your complete interactive guide to the world of cannabinoids.</p>
+        </header>
+
+        <section id="origin" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8">Part 1: The Origin Story (<span class="tooltip-trigger" tabindex="0">Biosynthesis<span class="tooltip-text">The process by which living organisms produce chemical compounds. In this case, how the cannabis plant creates cannabinoids.</span></span>)</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <p class="text-center text-gray-700 mb-8 max-w-2xl mx-auto">All major cannabinoids begin their life as another compound. The cannabis plant uses specific <span class="tooltip-trigger" tabindex="0">enzymes<span class="tooltip-text">Proteins that act as catalysts to speed up chemical reactions in the plant, like converting one cannabinoid into another.</span></span> to convert a single <span class="tooltip-trigger" tabindex="0">precursor<span class="tooltip-text">A compound that participates in a chemical reaction that produces another compound. CBGA is the precursor to THCA and CBDA.</span></span>, often called the "mother of all cannabinoids," into the building blocks for THC, CBD, and more.</p>
+                
+                <div class="relative flex items-center justify-center my-12" style="min-height: 300px;">
+                    <div class="flowchart-node bg-green-100 border-green-500 z-10 p-6 rounded-full text-xl">CBGA</div>
+                    
+                    <div class="absolute w-full h-full flex items-center justify-center">
+                        <div class="absolute text-center" style="transform: translate(-140px, -100px);">
+                            <div class="flowchart-node border-blue-500 mb-2">THCA</div>
+                            <p class="font-bold text-blue-700">THCA Synthase</p>
+                        </div>
+                        <div class="absolute text-center" style="transform: translate(140px, -100px);">
+                            <div class="flowchart-node border-red-500 mb-2">CBDA</div>
+                            <p class="font-bold text-red-700">CBDA Synthase</p>
+                        </div>
+                        <div class="absolute text-center" style="transform: translateY(120px);">
+                            <div class="flowchart-node border-purple-500 mb-2">CBCA</div>
+                            <p class="font-bold text-purple-700">CBCA Synthase</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12 bg-orange-50 p-6 rounded-lg border-l-4" style="border-color: var(--shaka-orange);">
+                    <h3 class="font-bold text-xl mb-2">The Activation Switch: <span class="tooltip-trigger" tabindex="0">Decarboxylation<span class="tooltip-text">A chemical reaction that removes a carboxyl group and releases carbon dioxide (CO2). It's the process that "activates" cannabinoids with heat.</span></span> 🔥</h3>
+                    <p class="text-gray-800">Raw cannabis contains acidic cannabinoids (e.g., THCA), which are non-psychoactive. Applying heat (~110°C / 230°F) removes a <span class="tooltip-trigger" tabindex="0">carboxyl group<span class="tooltip-text">A specific cluster of atoms (COOH) attached to cannabinoid acids. Its removal changes the molecule's shape and properties.</span></span>—a specific arrangement of carbon, oxygen, and hydrogen atoms (COOH). Removing this group changes the molecule's shape, allowing it to interact with the body's receptors and unlocking its primary effects.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="thc-family" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-2">Part 2: The THC Family Tree</h2>
+            <p class="text-center text-gray-700 mb-8 max-w-2xl mx-auto">This family is defined by its interaction with the brain's <span class="tooltip-trigger" tabindex="0">CB1 receptor<span class="tooltip-text">A key component of the endocannabinoid system, found primarily in the brain and central nervous system. Activation by THC causes psychoactive effects.</span></span>, which causes <span class="tooltip-trigger" tabindex="0">psychoactive<span class="tooltip-text">Affecting the mind or mental processes, often causing changes in mood, perception, and consciousness.</span></span> effects. Here's how they stack up.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="stat-card">
+                    <h3 class="text-2xl font-bold mb-2">Delta-9-THC</h3>
+                    <p class="text-gray-600 mb-4">The classic psychoactive compound. The standard for potency and legality.</p>
+                    <div>
+                        <div class="flex justify-between items-center mb-1"><label class="font-semibold text-sm">Relative Potency</label><span class="font-bold text-sm text-gray-700">100%</span></div>
+                        <div class="meter"><div class="meter-bar" style="width: 100%; background-color: var(--shaka-orange);"></div></div>
+                        <div class="flex justify-between items-center mt-2 mb-1"><label class="font-semibold text-sm">CB1 Receptor <span class="tooltip-trigger" tabindex="0">Affinity<span class="tooltip-text">The degree to which a molecule (like a cannabinoid) is attracted to and binds with a receptor. Higher affinity often means a stronger effect.</span></span></label><span class="font-bold text-sm text-gray-700">100%</span></div>
+                        <div class="meter"><div class="meter-bar" style="width: 100%; background-color: var(--shaka-orange);"></div></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <h3 class="text-2xl font-bold mb-2">HHC</h3>
+                    <p class="text-gray-600 mb-4">A stable form of THC. <span class="tooltip-trigger" tabindex="0">Hydrogenation<span class="tooltip-text">A chemical process that adds hydrogen atoms to a molecule, typically to make it more stable.</span></span> adds hydrogen atoms, making it more resistant to heat and light—much like how drying fruit preserves it and extends its shelf-life.</p>
+                    <div>
+                        <div class="flex justify-between items-center mb-1"><label class="font-semibold text-sm">Relative Potency</label><span class="font-bold text-sm text-gray-700">80%</span></div>
+                        <div class="meter"><div class="meter-bar" style="width: 80%; background-color: var(--shaka-orange); opacity: 0.9;"></div></div>
+                        <div class="flex justify-between items-center mt-2 mb-1"><label class="font-semibold text-sm">CB1 Receptor Affinity</label><span class="font-bold text-sm text-gray-700">85%</span></div>
+                        <div class="meter"><div class="meter-bar" style="width: 85%; background-color: var(--shaka-orange); opacity: 0.9;"></div></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <h3 class="text-2xl font-bold mb-2">Delta-8-THC</h3>
+                    <p class="text-gray-600 mb-4">Known for a milder, clearer high with less reported anxiety.</p>
+                    <div>
+                        <div class="flex justify-between items-center mb-1"><label class="font-semibold text-sm">Relative Potency</label><span class="font-bold text-sm text-gray-700">50%</span></div>
+                        <div class="meter"><div class="meter-bar" style="width: 50%; background-color: var(--shaka-orange); opacity: 0.8;"></div></div>
+                        <div class="flex justify-between items-center mt-2 mb-1"><label class="font-semibold text-sm">CB1 Receptor Affinity</label><span class="font-bold text-sm text-gray-700">50%</span></div>
+                        <div class="meter"><div class="meter-bar" style="width: 50%; background-color: var(--shaka-orange); opacity: 0.8;"></div></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <h3 class="text-2xl font-bold mb-2">Delta-10-THC</h3>
+                    <p class="text-gray-600 mb-4">Often reported to have a more energizing, sativa-like, and creative effect.</p>
+                    <div>
+                        <div class="flex justify-between items-center mb-1"><label class="font-semibold text-sm">Relative Potency</label><span class="font-bold text-sm text-gray-700">40%</span></div>
+                        <div class="meter"><div class="meter-bar" style="width: 40%; background-color: var(--shaka-orange); opacity: 0.7;"></div></div>
+                        <div class="flex justify-between items-center mt-2 mb-1"><label class="font-semibold text-sm">CB1 Receptor Affinity</label><span class="font-bold text-sm text-gray-700">35%</span></div>
+                        <div class="meter"><div class="meter-bar" style="width: 35%; background-color: var(--shaka-orange); opacity: 0.7;"></div></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <h3 class="text-2xl font-bold mb-2">THCV</h3>
+                    <p class="text-gray-600 mb-4">The "race car." Fast-acting and stimulating high. May suppress appetite at low doses.</p>
+                    <div>
+                        <div class="flex justify-between items-center mb-1"><label class="font-semibold text-sm">Relative Potency</label><span class="font-bold text-sm text-gray-700">25%</span></div>
+                        <div class="meter"><div class="meter-bar" style="width: 25%; background-color: var(--shaka-orange); opacity: 0.6;"></div></div>
+                        <div class="flex justify-between items-center mt-2 mb-1"><label class="font-semibold text-sm">CB1 Receptor Affinity</label><span class="font-bold text-sm text-gray-700">25%</span></div>
+                        <div class="meter"><div class="meter-bar" style="width: 25%; background-color: var(--shaka-orange); opacity: 0.6;"></div></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <h3 class="text-2xl font-bold mb-2">THC-p</h3>
+                    <p class="text-gray-600 mb-4">Extremely potent due to its longer carbon tail, allowing it to bind more effectively.</p>
+                    <div>
+                        <div class="flex justify-between items-center mb-1"><label class="font-semibold text-sm">Relative Potency</label><span class="font-bold text-sm" style="color: var(--shaka-orange);">>3000%</span></div>
+                        <div class="meter"><div class="meter-bar" style="width: 100%; background-color: var(--shaka-orange);"></div></div>
+                        <div class="flex justify-between items-center mt-2 mb-1"><label class="font-semibold text-sm">CB1 Receptor Affinity</label><span class="font-bold text-sm" style="color: var(--shaka-orange);">Highest</span></div>
+                        <div class="meter"><div class="meter-bar" style="width: 100%; background-color: var(--shaka-orange);"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cbd-family" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-2">Part 3: The CBD Family Tree</h2>
+            <p class="text-center text-gray-700 mb-8 max-w-2xl mx-auto">This family is known for its therapeutic benefits without a significant "high." They interact with the body in more subtle ways than the THC family.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="stat-card">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">CBD</h3>
+                        <p class="text-gray-600 font-semibold mb-2">What it is:</p>
+                        <p class="text-gray-600 mb-4">The most famous non-psychoactive compound.</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 font-semibold mb-2">How it works:</p>
+                        <p class="text-gray-600 mb-4">Interacts with <span class="tooltip-trigger" tabindex="0">serotonin<span class="tooltip-text">A neurotransmitter that helps regulate mood, happiness, and anxiety. CBD's interaction with its receptors is key to its calming effects.</span></span> and vanilloid receptors rather than binding strongly to CB1.</p>
+                        <p class="text-gray-600 font-semibold mb-2">Potential Uses:</p>
+                        <ul class="list-disc list-inside text-gray-600"><li>Anxiety</li><li>Inflammation</li><li>Pain & Seizures</li></ul>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">CBG</h3>
+                        <p class="text-gray-600 font-semibold mb-2">What it is:</p>
+                        <p class="text-gray-600 mb-4">The "Mother" molecule in its active, non-acidic form.</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 font-semibold mb-2">How it works:</p>
+                        <p class="text-gray-600 mb-4">Can interact directly with both CB1 and <span class="tooltip-trigger" tabindex="0">CB2 receptors<span class="tooltip-text">Part of the endocannabinoid system, found mainly in the immune system and peripheral tissues. They are involved in regulating inflammation and pain.</span></span> without causing a high.</p>
+                        <p class="text-gray-600 font-semibold mb-2">Potential Uses:</p>
+                        <ul class="list-disc list-inside text-gray-600"><li>Gut Health (IBD)</li><li>Antibacterial</li><li>Neuroprotection</li></ul>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">CBN</h3>
+                        <p class="text-gray-600 font-semibold mb-2">What it is:</p>
+                        <p class="text-gray-600 mb-4">A mildly psychoactive compound formed as THC degrades over time.</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 font-semibold mb-2">How it works:</p>
+                        <p class="text-gray-600 mb-4">Has a weak affinity for the CB1 receptor, about 10% that of THC.</p>
+                        <p class="text-gray-600 font-semibold mb-2">Potential Uses:</p>
+                        <ul class="list-disc list-inside text-gray-600"><li>Sedation / Sleep</li><li>Antibacterial</li><li>Appetite Stimulation</li></ul>
+                    </div>
+                </div>
+                 <div class="stat-card">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">CBC</h3>
+                        <p class="text-gray-600 font-semibold mb-2">What it is:</p>
+                        <p class="text-gray-600 mb-4">A common but non-psychoactive cannabinoid.</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 font-semibold mb-2">How it works:</p>
+                        <p class="text-gray-600 mb-4">Binds poorly to CB1, but interacts with other receptors linked to pain perception (TRPV1, TRPA1).</p>
+                        <p class="text-gray-600 font-semibold mb-2">Potential Uses:</p>
+                        <ul class="list-disc list-inside text-gray-600"><li>Anti-inflammatory</li><li>Pain Relief</li><li><span class="tooltip-trigger" tabindex="0">Neurogenesis<span class="tooltip-text">The process by which new neurons (brain cells) are formed in the brain.</span></span></li></ul>
+                    </div>
+                </div>
+                 <div class="stat-card">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">CBDV</h3>
+                        <p class="text-gray-600 font-semibold mb-2">What it is:</p>
+                        <p class="text-gray-600 mb-4">The "Varin" variant of CBD, with a different chemical tail.</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 font-semibold mb-2">How it works:</p>
+                        <p class="text-gray-600 mb-4">Mechanism is still under research, but it shows potential in modulating brain activity.</p>
+                        <p class="text-gray-600 font-semibold mb-2">Potential Uses:</p>
+                        <ul class="list-disc list-inside text-gray-600"><li>Seizure Disorders</li><li>Autism Symptoms</li><li>Nausea</li></ul>
+                    </div>
+                </div>
+                 <div class="stat-card">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">CBDA</h3>
+                        <p class="text-gray-600 font-semibold mb-2">What it is:</p>
+                        <p class="text-gray-600 mb-4">The raw, acidic precursor to CBD, found in living cannabis plants.</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 font-semibold mb-2">How it works:</p>
+                        <p class="text-gray-600 mb-4">Acts as a <span class="tooltip-trigger" tabindex="0">COX-2 inhibitor<span class="tooltip-text">A substance that blocks the COX-2 enzyme, which is involved in inflammation and pain. Similar to how drugs like ibuprofen work.</span></span> and interacts with serotonin receptors.</p>
+                        <p class="text-gray-600 font-semibold mb-2">Potential Uses:</p>
+                        <ul class="list-disc list-inside text-gray-600"><li>Anti-inflammatory</li><li>Nausea</li><li>Anxiety</li></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="key-concepts" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8">Part 4: Key Concepts & Legal Status</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h3 class="text-2xl font-bold mb-4">The <span class="tooltip-trigger" tabindex="0">Entourage Effect<span class="tooltip-text">The theory that cannabinoids, terpenes, and other compounds in cannabis work together to produce a greater effect than any single compound alone.</span></span></h3>
+                    <p class="text-gray-700 mb-4">The theory that cannabinoids and <span class="tooltip-trigger" tabindex="0">terpenes<span class="tooltip-text">Aromatic compounds found in many plants, including cannabis, that create the characteristic scent and flavor (e.g., pine, citrus, lavender). They also have their own therapeutic effects.</span></span> work together synergistically. The combined effect is greater than the sum of the individual parts, making full-spectrum products highly valued.</p>
+                    <div class="text-center font-bold text-xl space-y-2">
+                        <span>[ THC ]</span> <span style="color: var(--shaka-blue);">+</span> <span>[ CBD ]</span> <span style="color: var(--shaka-blue);">+</span> <span>[ Terpenes ]</span><br>
+                        <span class="text-2xl text-green-600">→ Enhanced Therapeutic Effect</span>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                     <h3 class="text-2xl font-bold mb-4">Legal Snapshot (USA)</h3>
+                     <p class="text-gray-700 mb-4">The 2018 Farm Bill legalized hemp products containing less than:</p>
+                     <p class="text-7xl font-black text-center my-4" style="color: var(--shaka-orange);">0.3%</p>
+                     <p class="text-center font-bold text-2xl text-gray-800">Delta-9-THC</p>
+                     <p class="text-gray-700 mt-4">This created a legal gray area for isomers like Delta-8 and Delta-10. State laws vary widely. <strong>Always verify local regulations.</strong></p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="text-center p-4 mt-8">
+        <p class="text-gray-500 text-sm">This infographic, Pure Shaka's Cannabis Bible, is for educational purposes only and does not constitute medical or legal advice. Information is current as of July 2025.</p>
+    </footer>
+
+</body>
+</html>

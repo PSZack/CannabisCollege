@@ -100,6 +100,111 @@
             visibility: visible;
             opacity: 1;
         }
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 250px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-card-inner, .flip-card.clicked .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .flip-card-front {
+            background-color: white;
+            border-top: 5px solid var(--shaka-orange);
+        }
+        .flip-card-back {
+            background-color: var(--shaka-dark-text);
+            color: white;
+            transform: rotateY(180deg);
+            overflow: hidden;
+        }
+
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                background-color: white;
+            }
+            .container {
+                padding: 0.5in !important;
+                margin: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+            h1, h2, h3 {
+                color: var(--shaka-dark-text) !important;
+            }
+            .shaka-title {
+                color: var(--shaka-blue) !important;
+            }
+            section {
+                page-break-inside: avoid;
+            }
+            .grid {
+                grid-template-columns: repeat(1, 1fr) !important;
+            }
+            .stat-card, .flip-card {
+                page-break-inside: avoid;
+            }
+            .tooltip-trigger {
+                border-bottom: none;
+                font-weight: normal;
+            }
+            .flip-card {
+                height: auto;
+                perspective: none;
+                cursor: default;
+                border: 1px solid #ddd;
+                border-radius: 0.75rem;
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+            .flip-card-inner {
+                position: static;
+                transform: none !important;
+                transition: none;
+            }
+            .flip-card-front {
+                position: static;
+                transform: none !important;
+                backface-visibility: visible;
+                display: block;
+                box-shadow: none;
+                padding: 0;
+                border: none;
+                background-color: transparent;
+            }
+            .flip-card-back {
+                display: none;
+            }
+            footer {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -294,32 +399,103 @@
             </div>
         </section>
 
-        <section id="key-concepts" class="mb-16">
-            <h2 class="text-3xl font-bold text-center mb-8">Part 4: Key Concepts & Legal Status</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-white rounded-lg shadow-lg p-8">
-                    <h3 class="text-2xl font-bold mb-4">The <span class="tooltip-trigger" tabindex="0">Entourage Effect<span class="tooltip-text">The theory that cannabinoids, terpenes, and other compounds in cannabis work together to produce a greater effect than any single compound alone.</span></span></h3>
-                    <p class="text-gray-700 mb-4">The theory that cannabinoids and <span class="tooltip-trigger" tabindex="0">terpenes<span class="tooltip-text">Aromatic compounds found in many plants, including cannabis, that create the characteristic scent and flavor (e.g., pine, citrus, lavender). They also have their own therapeutic effects.</span></span> work together synergistically. The combined effect is greater than the sum of the individual parts, making full-spectrum products highly valued.</p>
-                    <div class="text-center font-bold text-xl space-y-2">
-                        <span>[ THC ]</span> <span style="color: var(--shaka-blue);">+</span> <span>[ CBD ]</span> <span style="color: var(--shaka-blue);">+</span> <span>[ Terpenes ]</span><br>
-                        <span class="text-2xl text-green-600">→ Enhanced Therapeutic Effect</span>
+        <section id="concentrates" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-2">Part 4: Understanding THC <span class="tooltip-trigger" tabindex="0">Concentrates<span class="tooltip-text">Highly potent cannabis extracts that have concentrated compounds like THC and terpenes. They are much stronger than raw cannabis flower.</span></span></h2>
+            <p class="text-center text-gray-700 mb-8 max-w-2xl mx-auto">Concentrates are made by isolating the most desirable parts of the plant. Below are common types—click or tap each card to flip it!</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+
+                <div class="flip-card" tabindex="0">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h3 class="text-2xl font-bold mb-2">Shatter</h3>
+                            <p class="text-gray-600">A hard, glass-like concentrate made using a <span class="tooltip-trigger" tabindex="0">solvent<span class="tooltip-text">A liquid (like butane or CO2) that dissolves cannabinoids and terpenes from the plant material.</span></span>.</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3 class="text-2xl font-bold">Shatter</h3>
+                        </div>
                     </div>
                 </div>
-                <div class="bg-white rounded-lg shadow-lg p-8">
-                     <h3 class="text-2xl font-bold mb-4">Legal Snapshot (USA)</h3>
-                     <p class="text-gray-700 mb-4">The 2018 Farm Bill legalized hemp products containing less than:</p>
-                     <p class="text-7xl font-black text-center my-4" style="color: var(--shaka-orange);">0.3%</p>
-                     <p class="text-center font-bold text-2xl text-gray-800">Delta-9-THC</p>
-                     <p class="text-gray-700 mt-4">This created a legal gray area for isomers like Delta-8 and Delta-10. State laws vary widely. <strong>Always verify local regulations.</strong></p>
+
+                <div class="flip-card" tabindex="0">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h3 class="text-2xl font-bold mb-2">Wax / Budder</h3>
+                            <p class="text-gray-600">Solvent-based extracts with a softer, opaque, and waxy texture.</p>
+                        </div>
+                        <div class="flip-card-back">
+                             <h3 class="text-2xl font-bold">Wax / Budder</h3>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="flip-card" tabindex="0">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h3 class="text-2xl font-bold mb-2">Live Resin</h3>
+                            <p class="text-gray-600">A flavorful extract made from fresh-frozen plants to preserve <span class="tooltip-trigger" tabindex="0">terpenes<span class="tooltip-text">Aromatic compounds that give cannabis its scent and flavor. They also have their own therapeutic effects.</span></span>.</p>
+                        </div>
+                        <div class="flip-card-back">
+                             <h3 class="text-2xl font-bold">Live Resin</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card" tabindex="0">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h3 class="text-2xl font-bold mb-2">Kief</h3>
+                            <p class="text-gray-600">A simple, solventless powder made of collected <span class="tooltip-trigger" tabindex="0">trichomes<span class="tooltip-text">The tiny, crystal-like glands on cannabis flowers that produce cannabinoids and terpenes.</span></span>.</p>
+                        </div>
+                        <div class="flip-card-back">
+                             <h3 class="text-2xl font-bold">Kief</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card" tabindex="0">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h3 class="text-2xl font-bold mb-2">Hash</h3>
+                            <p class="text-gray-600">Kief that has been heated and pressed into a solid, dark, and potent block.</p>
+                        </div>
+                        <div class="flip-card-back">
+                             <h3 class="text-2xl font-bold">Hash</h3>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flip-card" tabindex="0">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h3 class="text-2xl font-bold mb-2">Rosin</h3>
+                            <p class="text-gray-600">A pure, solventless extract made by squeezing cannabis with heat and pressure.</p>
+                        </div>
+                        <div class="flip-card-back">
+                             <h3 class="text-2xl font-bold">Rosin</h3>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
-
+        
     </div>
 
     <footer class="text-center p-4 mt-8">
         <p class="text-gray-500 text-sm">This infographic, Pure Shaka's Cannabis Bible, is for educational purposes only and does not constitute medical or legal advice. Information is current as of July 2025.</p>
     </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const flipCards = document.querySelectorAll('.flip-card');
+            flipCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.classList.toggle('clicked');
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>
+
